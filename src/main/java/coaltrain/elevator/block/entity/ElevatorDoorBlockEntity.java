@@ -6,7 +6,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
+import software.bernie.geckolib.animatable.manager.AnimatableManager;
+import software.bernie.geckolib.animatable.processing.AnimationController;
+import software.bernie.geckolib.animatable.processing.AnimationTest;
+import software.bernie.geckolib.animation.PlayState;
+import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.util.GeckoLibUtil;
 import coaltrain.elevator.block.ElevatorDoorBlock;
 
@@ -20,16 +24,15 @@ public class ElevatorDoorBlockEntity extends BlockEntity implements GeoBlockEnti
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, this::animationController));
+        controllers.add(new AnimationController<>("controller", 0, this::animationController));
     }
 
-    protected PlayState animationController(AnimationState<ElevatorDoorBlockEntity> state) {
+    protected PlayState animationController(AnimationTest<ElevatorDoorBlockEntity> test) {
         if (isOpen) {
-            state.setAnimation(RawAnimation.begin().thenLoop("animation.elevator_door.open"));
+            return test.setAndContinue(RawAnimation.begin().thenLoop("animation.elevator_door.open"));
         } else {
-            state.setAnimation(RawAnimation.begin().thenLoop("animation.elevator_door.closed"));
+            return test.setAndContinue(RawAnimation.begin().thenLoop("animation.elevator_door.closed"));
         }
-        return PlayState.CONTINUE;
     }
 
     @Override
