@@ -12,24 +12,26 @@ import net.minecraft.util.Identifier;
 
 public class ModBlocks {
     public static final Block ELEVATOR_DOOR_LEFT = registerBlock("elevator_door_left",
-            new ElevatorDoorBlock(AbstractBlock.Settings.create()
-                    .mapColor(MapColor.IRON_GRAY)
-                    .requiresTool()
-                    .strength(5.0f, 6.0f)
-                    .sounds(BlockSoundGroup.METAL)
-                    .pistonBehavior(PistonBehavior.BLOCK)
-                    .nonOpaque(),
-                    ElevatorDoorBlock.DoorPart.LEFT));
+            new ElevatorDoorBlock(
+                    ElevatorDoorBlock.DoorPart.LEFT,
+                    AbstractBlock.Settings.create()
+                            .mapColor(MapColor.IRON_GRAY)
+                            .requiresTool()
+                            .strength(5.0f, 6.0f)
+                            .sounds(BlockSoundGroup.METAL)
+                            .pistonBehavior(PistonBehavior.BLOCK)
+                            .nonOpaque()));
 
     public static final Block ELEVATOR_DOOR_RIGHT = registerBlock("elevator_door_right",
-            new ElevatorDoorBlock(AbstractBlock.Settings.create()
-                    .mapColor(MapColor.IRON_GRAY)
-                    .requiresTool()
-                    .strength(5.0f, 6.0f)
-                    .sounds(BlockSoundGroup.METAL)
-                    .pistonBehavior(PistonBehavior.BLOCK)
-                    .nonOpaque(),
-                    ElevatorDoorBlock.DoorPart.RIGHT));
+            new ElevatorDoorBlock(
+                    ElevatorDoorBlock.DoorPart.RIGHT,
+                    AbstractBlock.Settings.create()
+                            .mapColor(MapColor.IRON_GRAY)
+                            .requiresTool()
+                            .strength(5.0f, 6.0f)
+                            .sounds(BlockSoundGroup.METAL)
+                            .pistonBehavior(PistonBehavior.BLOCK)
+                            .nonOpaque()));
 
     private static Block registerBlock(String name, Block block) {
         return Registry.register(Registries.BLOCK, Identifier.of(Elevator.MOD_ID, name), block);

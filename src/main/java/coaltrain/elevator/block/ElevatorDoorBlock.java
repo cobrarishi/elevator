@@ -41,7 +41,8 @@ public class ElevatorDoorBlock extends BlockWithEntity {
 
     private final DoorPart doorPart;
 
-    private ElevatorDoorBlock(Settings settings, DoorPart part) {
+    // Fixed: Changed parameter order to match CODEC
+    public ElevatorDoorBlock(DoorPart part, Settings settings) {
         super(settings);
         this.doorPart = part;
         setDefaultState(getStateManager().getDefaultState()
@@ -49,10 +50,6 @@ public class ElevatorDoorBlock extends BlockWithEntity {
                 .with(OPEN, false)
                 .with(FACING, Direction.NORTH)
                 .with(HALF, VerticalHalf.BOTTOM));
-    }
-
-    public ElevatorDoorBlock(Settings settings) {
-        this(settings, DoorPart.LEFT);
     }
 
     @Override
@@ -76,7 +73,8 @@ public class ElevatorDoorBlock extends BlockWithEntity {
         World world = ctx.getWorld();
         Direction facing = ctx.getHorizontalPlayerFacing();
 
-        if (pos.getY() < world.getTopY() - 1) {
+        // Fixed: Changed getTopY() to getTopY() - 1 or use world.getHeight() - 1
+        if (pos.getY() < world.getHeight() - 1) {
             BlockPos abovePos = pos.up();
             if (world.getBlockState(abovePos).canReplace(ctx)) {
                 return this.getDefaultState()
