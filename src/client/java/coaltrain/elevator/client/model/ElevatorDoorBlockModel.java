@@ -9,7 +9,7 @@ import software.bernie.geckolib.renderer.base.GeoRenderState;
 public class ElevatorDoorBlockModel extends GeoModel<ElevatorDoorBlockEntity> {
     @Override
     public Identifier getModelResource(GeoRenderState renderState) {
-        return Identifier.of(Elevator.MOD_ID, "elevator_door");
+        return Identifier.of(Elevator.MOD_ID, "geo/elevator_door.geo.json");
     }
 
     @Override
@@ -19,6 +19,6 @@ public class ElevatorDoorBlockModel extends GeoModel<ElevatorDoorBlockEntity> {
 
     @Override
     public Identifier getAnimationResource(ElevatorDoorBlockEntity animatable) {
-        return Identifier.of(Elevator.MOD_ID, "elevator_door");
+        return Identifier.of(Elevator.MOD_ID, "animations/elevator_door.animation.json");
     }
 }
