@@ -23,6 +23,7 @@ import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
@@ -245,12 +246,12 @@ public class ElevatorDoorBlock extends BlockWithEntity {
     }
 
     @Override
-    public VoxelShape getCollisionShape(BlockState state, WorldView world, BlockPos pos) {
+    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return state.get(OPEN) ? VoxelShapes.empty() : CLOSED_SHAPE;
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, WorldView world, BlockPos pos, ShapeContext context) {
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return state.get(OPEN) ? VoxelShapes.empty() : CLOSED_SHAPE;
     }
 
