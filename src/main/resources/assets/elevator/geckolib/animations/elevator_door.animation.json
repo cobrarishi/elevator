@@ -1,0 +1,29 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.elevator_door.open": {
+      "animation_length": 1.0,
+      "bones": {
+        "door": {
+          "position": {
+            "0.0": [0, 0, 0],
+            "0.5": [-16, 0, 0],
+            "1.0": [-16, 0, 0]
+          }
+        }
+      }
+    },
+    "animation.elevator_door.closed": {
+      "animation_length": 1.0,
+      "bones": {
+        "door": {
+          "position": {
+            "0.0": [-16, 0, 0],
+            "0.5": [0, 0, 0],
+            "1.0": [0, 0, 0]
+          }
+        }
+      }
+    }
+  }
+}

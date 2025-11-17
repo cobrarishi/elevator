@@ -44,14 +44,7 @@ public class ElevatorDoorBlock extends BlockWithEntity {
     public ElevatorDoorBlock(DoorPart part, Settings settings) {
         super(settings);
         this.doorPart = part;
-        setDefaultState(getDefaultState()
-                .with(PART, doorPart)
-                .with(OPEN, false)
-                .with(FACING, Direction.NORTH)
-                .with(HALF, VerticalHalf.BOTTOM));
     }
-
-
 
     @Override
     protected MapCodec<? extends BlockWithEntity> getCodec() {
@@ -77,7 +70,8 @@ public class ElevatorDoorBlock extends BlockWithEntity {
         if (pos.getY() < world.getHeight() - 1) {
             BlockPos abovePos = pos.up();
             if (world.getBlockState(abovePos).canReplace(ctx)) {
-                return this.getDefaultState()
+                return this.getStateManager().getDefaultState()
+                        .with(PART, doorPart)
                         .with(FACING, facing)
                         .with(HALF, VerticalHalf.BOTTOM)
                         .with(OPEN, false);
@@ -104,11 +98,14 @@ public class ElevatorDoorBlock extends BlockWithEntity {
             world.setBlockState(topPos, state.with(HALF, VerticalHalf.TOP), Block.NOTIFY_ALL);
 
             Block otherBlock = doorPart == DoorPart.LEFT ? ModBlocks.ELEVATOR_DOOR_RIGHT : ModBlocks.ELEVATOR_DOOR_LEFT;
-            world.setBlockState(otherBottomPos, otherBlock.getDefaultState()
+            BlockState otherDefaultState = otherBlock.getStateManager().getDefaultState();
+            world.setBlockState(otherBottomPos, otherDefaultState
+                    .with(PART, doorPart == DoorPart.LEFT ? DoorPart.RIGHT : DoorPart.LEFT)
                     .with(FACING, facing)
                     .with(HALF, VerticalHalf.BOTTOM)
                     .with(OPEN, false), Block.NOTIFY_ALL);
-            world.setBlockState(otherTopPos, otherBlock.getDefaultState()
+            world.setBlockState(otherTopPos, otherDefaultState
+                    .with(PART, doorPart == DoorPart.LEFT ? DoorPart.RIGHT : DoorPart.LEFT)
                     .with(FACING, facing)
                     .with(HALF, VerticalHalf.TOP)
                     .with(OPEN, false), Block.NOTIFY_ALL);
@@ -206,8 +203,9 @@ public class ElevatorDoorBlock extends BlockWithEntity {
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos abovePos = pos.up();
-        return world.getBlockState(abovePos).canReplace(new ItemPlacementContext(null, null, null, null, null)) ||
-                world.getBlockState(abovePos).getBlock() instanceof ElevatorDoorBlock;
+        BlockState aboveState = world.getBlockState(abovePos);
+        return aboveState.isReplaceable() || aboveState.isAir() ||
+                aboveState.getBlock() instanceof ElevatorDoorBlock;
     }
 
     @Nullable
