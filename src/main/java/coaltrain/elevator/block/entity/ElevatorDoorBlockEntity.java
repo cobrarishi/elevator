@@ -23,10 +23,16 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class ElevatorDoorBlockEntity extends BlockEntity implements GeoBlockEntity {
     private static final String OPEN_KEY = "Open";
-    private static final RawAnimation OPEN_ANIMATION = RawAnimation.begin()
-            .then("animation.elevator_door.open", LoopType.PLAY_ONCE);
-    private static final RawAnimation CLOSE_ANIMATION = RawAnimation.begin()
-            .then("animation.elevator_door.close", LoopType.PLAY_ONCE);
+    private static final RawAnimation OPEN_TRANSITION = RawAnimation.begin()
+            .then("animation.elevator_door.open", LoopType.PLAY_ONCE)
+            .then("animation.elevator_door.open_idle", LoopType.LOOP);
+    private static final RawAnimation CLOSE_TRANSITION = RawAnimation.begin()
+            .then("animation.elevator_door.close", LoopType.PLAY_ONCE)
+            .then("animation.elevator_door.closed_idle", LoopType.LOOP);
+    private static final RawAnimation OPEN_IDLE = RawAnimation.begin()
+            .then("animation.elevator_door.open_idle", LoopType.LOOP);
+    private static final RawAnimation CLOSED_IDLE = RawAnimation.begin()
+            .then("animation.elevator_door.closed_idle", LoopType.LOOP);
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private boolean isOpen;
@@ -48,14 +54,15 @@ public class ElevatorDoorBlockEntity extends BlockEntity implements GeoBlockEnti
         AnimationController<ElevatorDoorBlockEntity> controller = state.getController();
 
         if (!animationInitialized) {
-            controller.setAnimation(this.isOpen ? OPEN_ANIMATION : CLOSE_ANIMATION);
+            controller.setAnimation(this.isOpen ? OPEN_IDLE : CLOSED_IDLE);
             animationInitialized = true;
             lastAnimatedState = this.isOpen;
+            return PlayState.CONTINUE;
         }
 
         if (lastAnimatedState != this.isOpen) {
             controller.forceAnimationReset();
-            controller.setAnimation(this.isOpen ? OPEN_ANIMATION : CLOSE_ANIMATION);
+            controller.setAnimation(this.isOpen ? OPEN_TRANSITION : CLOSE_TRANSITION);
             lastAnimatedState = this.isOpen;
         }
 

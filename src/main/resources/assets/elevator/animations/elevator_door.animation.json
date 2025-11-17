@@ -42,6 +42,40 @@
           }
         }
       }
+    },
+    "animation.elevator_door.open_idle": {
+      "animation_length": 1.0,
+      "bones": {
+        "left_panel": {
+          "position": {
+            "0.0": [-16, 0, 0],
+            "1.0": [-16, 0, 0]
+          }
+        },
+        "right_panel": {
+          "position": {
+            "0.0": [16, 0, 0],
+            "1.0": [16, 0, 0]
+          }
+        }
+      }
+    },
+    "animation.elevator_door.closed_idle": {
+      "animation_length": 1.0,
+      "bones": {
+        "left_panel": {
+          "position": {
+            "0.0": [0, 0, 0],
+            "1.0": [0, 0, 0]
+          }
+        },
+        "right_panel": {
+          "position": {
+            "0.0": [0, 0, 0],
+            "1.0": [0, 0, 0]
+          }
+        }
+      }
     }
   }
 }
