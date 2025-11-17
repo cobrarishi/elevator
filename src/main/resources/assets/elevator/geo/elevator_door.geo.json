@@ -4,27 +4,45 @@
     {
       "description": {
         "identifier": "geometry.elevator_door",
-        "texture_width": 16,
-        "texture_height": 16,
-        "visible_bounds_width": 2,
-        "visible_bounds_height": 3,
+        "texture_width": 64,
+        "texture_height": 64,
+        "visible_bounds_width": 4,
+        "visible_bounds_height": 4,
         "visible_bounds_offset": [0, 1, 0]
       },
       "bones": [
         {
-          "name": "door",
+          "name": "left_panel",
           "pivot": [0, 0, 0],
           "cubes": [
             {
-              "origin": [0, 0, 0],
+              "origin": [-16, 0, -1],
               "size": [16, 32, 2],
               "uv": {
-                "north": {"uv": [0, 0], "uv_size": [16, 16]},
-                "east": {"uv": [0, 0], "uv_size": [2, 16]},
-                "south": {"uv": [0, 0], "uv_size": [16, 16]},
-                "west": {"uv": [0, 0], "uv_size": [2, 16]},
+                "north": {"uv": [0, 0], "uv_size": [16, 32]},
+                "east": {"uv": [32, 0], "uv_size": [2, 32]},
+                "south": {"uv": [0, 32], "uv_size": [16, 32]},
+                "west": {"uv": [34, 0], "uv_size": [2, 32]},
                 "up": {"uv": [0, 0], "uv_size": [16, 2]},
-                "down": {"uv": [0, 0], "uv_size": [16, 2]}
+                "down": {"uv": [0, 2], "uv_size": [16, 2]}
+              }
+            }
+          ]
+        },
+        {
+          "name": "right_panel",
+          "pivot": [0, 0, 0],
+          "cubes": [
+            {
+              "origin": [0, 0, -1],
+              "size": [16, 32, 2],
+              "uv": {
+                "north": {"uv": [16, 0], "uv_size": [16, 32]},
+                "east": {"uv": [36, 0], "uv_size": [2, 32]},
+                "south": {"uv": [16, 32], "uv_size": [16, 32]},
+                "west": {"uv": [38, 0], "uv_size": [2, 32]},
+                "up": {"uv": [16, 0], "uv_size": [16, 2]},
+                "down": {"uv": [16, 2], "uv_size": [16, 2]}
               }
             }
           ]

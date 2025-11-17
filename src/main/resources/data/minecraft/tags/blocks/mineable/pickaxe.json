@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "elevator:elevator_door_left",
+    "elevator:elevator_door_right"
+  ]
+}
