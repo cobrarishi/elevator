@@ -4,10 +4,10 @@
     {
       "description": {
         "identifier": "geometry.elevator_door",
-        "texture_width": 16,
-        "texture_height": 16,
-        "visible_bounds_width": 2,
-        "visible_bounds_height": 3,
+        "texture_width": 32,
+        "texture_height": 32,
+        "visible_bounds_width": 3,
+        "visible_bounds_height": 4,
         "visible_bounds_offset": [0, 1, 0]
       },
       "bones": [
@@ -17,14 +17,14 @@
           "cubes": [
             {
               "origin": [0, 0, 0],
-              "size": [16, 32, 2],
+              "size": [32, 32, 16],
               "uv": {
-                "north": {"uv": [0, 0], "uv_size": [16, 16]},
-                "east": {"uv": [0, 0], "uv_size": [2, 16]},
-                "south": {"uv": [0, 0], "uv_size": [16, 16]},
-                "west": {"uv": [0, 0], "uv_size": [2, 16]},
-                "up": {"uv": [0, 0], "uv_size": [16, 2]},
-                "down": {"uv": [0, 0], "uv_size": [16, 2]}
+                "north": {"uv": [0, 0], "uv_size": [32, 32]},
+                "east": {"uv": [0, 0], "uv_size": [16, 32]},
+                "south": {"uv": [0, 0], "uv_size": [32, 32]},
+                "west": {"uv": [0, 0], "uv_size": [16, 32]},
+                "up": {"uv": [0, 0], "uv_size": [32, 16]},
+                "down": {"uv": [0, 0], "uv_size": [32, 16]}
               }
             }
           ]
