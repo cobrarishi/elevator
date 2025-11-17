@@ -227,17 +227,22 @@ public class ElevatorDoorBlock extends BlockWithEntity {
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return isControllerState(state) ? new ElevatorDoorBlockEntity(pos, state) : null;
+        return hasBlockEntity(state) ? new ElevatorDoorBlockEntity(pos, state) : null;
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        if (!isControllerState(state)) {
+        if (!hasBlockEntity(state)) {
             return null;
         }
         return validateTicker(type, ModBlockEntities.ELEVATOR_DOOR_BLOCK_ENTITY,
                 (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
+    }
+
+    @Override
+    public boolean hasBlockEntity(BlockState state) {
+        return state.get(PART) == DoorPart.LEFT && state.get(HALF) == VerticalHalf.BOTTOM;
     }
 
     @Override
@@ -252,10 +257,6 @@ public class ElevatorDoorBlock extends BlockWithEntity {
 
     private static BlockPos getOppositeBottomPos(BlockPos pos, Direction facing, DoorPart part) {
         return part == DoorPart.LEFT ? pos.offset(facing.rotateYClockwise()) : pos.offset(facing.rotateYCounterclockwise());
-    }
-
-    private static boolean isControllerState(BlockState state) {
-        return state.get(PART) == DoorPart.LEFT && state.get(HALF) == VerticalHalf.BOTTOM;
     }
 
     private static BlockPos getLeftBottomPos(BlockPos bottomPos, Direction facing, DoorPart part) {
