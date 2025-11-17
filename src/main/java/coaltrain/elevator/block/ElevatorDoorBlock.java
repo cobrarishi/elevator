@@ -41,16 +41,17 @@ public class ElevatorDoorBlock extends BlockWithEntity {
 
     private final DoorPart doorPart;
 
-    // Fixed: Changed parameter order to match CODEC
     public ElevatorDoorBlock(DoorPart part, Settings settings) {
         super(settings);
         this.doorPart = part;
-        setDefaultState(getStateManager().getDefaultState()
-                .with(PART, part)
+        setDefaultState(getDefaultState()
+                .with(PART, doorPart)
                 .with(OPEN, false)
                 .with(FACING, Direction.NORTH)
                 .with(HALF, VerticalHalf.BOTTOM));
     }
+
+
 
     @Override
     protected MapCodec<? extends BlockWithEntity> getCodec() {
@@ -73,7 +74,6 @@ public class ElevatorDoorBlock extends BlockWithEntity {
         World world = ctx.getWorld();
         Direction facing = ctx.getHorizontalPlayerFacing();
 
-        // Fixed: Changed getTopY() to getTopY() - 1 or use world.getHeight() - 1
         if (pos.getY() < world.getHeight() - 1) {
             BlockPos abovePos = pos.up();
             if (world.getBlockState(abovePos).canReplace(ctx)) {
